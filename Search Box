@@ -1,0 +1,39 @@
+import "./styles.css";
+import React, { useState } from "react";
+
+export default function App() {
+
+  const list = [
+    "Banana",
+    "Apple",
+    "Orange",
+    "Mango",
+    "Pineapple",
+    "Watermelon"
+  ];
+
+const[filteredlist, setFilteredlist] = useState([])
+
+  const handleSearch = (e) => {
+    if(e.target.value === ""){
+     setFilteredlist(list)
+    }else{
+     const filteredValues = list.filter((element) => {
+      element.toLowerCase().includes(e.target.value.toLowerCase())
+     })
+     setFilteredlist(filteredValues)
+    }
+  }  
+  return (
+    <div className="App">
+     <label>Search : </label>
+     <input type="text" name ="text" onChange={handleSearch} />
+    <div>
+     {
+       filteredlist && filteredlist.map((element, index) => (
+        <div key={index}>{element}</div>
+       ))}
+    </div>
+    </div>
+  );
+}
